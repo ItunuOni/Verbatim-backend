@@ -2,13 +2,9 @@ from supabase import create_client, Client
 from app.schemas.config import settings
 
 
-def init_supabase() -> Client:
-    """
-    Initializes and returns a Supabase client using credentials from .env
-    """
-    url: str = settings.SUPABASE_URL
-    key: str = settings.SUPABASE_KEY
-    return create_client(url, key)
+print("SUPABASE_URL:", settings.SUPABASE_URL)
+print("SUPABASE_KEY (starts with):", settings.SUPABASE_KEY[:20])
+print("SUPABASE_SERVICE_KEY (starts with):", settings.SUPABASE_SERVICE_KEY[:20])
 
-
-supabase = init_supabase()
+# Use the PUBLIC ANON KEY for user auth
+supabase: Client = create_client(settings.SUPABASE_URL, settings.SUPABASE_KEY)
